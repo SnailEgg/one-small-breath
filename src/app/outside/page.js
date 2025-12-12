@@ -45,7 +45,7 @@ export default function Home() {
                         <h1 className="w-full text-2xl pb-4">You find yourself alone on a black, silent night.</h1>
                         <p className="w-full pb-4">Just as dark and quiet as the night is the city ahead, its lightless towers made visible only by the gaps they leave in the starry sky.</p>
                         <p className="w-full pb-4">You leave the station behind you and sit beneath an oak tree.</p>
-                        <p className="w-full pb-12">Your eyelids are suddenly heavy. You feel like you've been awake for three hundred thousand years.</p>
+                        <p className="w-full pb-12">Your eyelids are suddenly heavy. You feel like you&apos;ve been awake for three hundred thousand years.</p>
                         <div className='w-[15rem]'>
                             <Button buttonType="button" onClick={endGame} className="py-2 w-full" theme="story" text="Close your eyes"></Button>
                         </div>
