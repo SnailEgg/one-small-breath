@@ -4,16 +4,19 @@ import Button from '@/app/Button';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 const merriweather_sans = Merriweather_Sans({subsets: ["latin"]});
 
 export default function Home() {
     const [ isOver, setIsOver ] = useState(false);
+    const [ showLink, setShowLink ] = useState(false);
     const [ isOutside, setIsOutside ] = useState(false);
     const router = useRouter();
 
     const endGame = () => {
         setIsOver(true);
         axios.post('/api/logout');
+        setTimeout(() => { setShowLink(true); }, 5000);
     }
 
     // redirect the user to the game if they haven't completed it yet
@@ -50,7 +53,10 @@ export default function Home() {
                             <Button buttonType="button" onClick={endGame} className="py-2 w-full" theme="story" text="Close your eyes"></Button>
                         </div>
                     </div>
-                    : <h1 className='text-2xl'>And the world closes its eyes.</h1>
+                    : <div className='flex flex-col justify-between items-center h-[15rem]'>
+                        <h1 className='text-2xl'>And the world closes its eyes.</h1>
+                        { showLink ? <Link href='/credits' className='w-[15rem]'><Button text='End' className="py-2 w-full" theme='story' /></Link> : '' }
+                    </div>
                 }
             </div>
         </div>   
