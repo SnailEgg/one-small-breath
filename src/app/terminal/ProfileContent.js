@@ -9,9 +9,8 @@ import { connect } from "react-redux";
 const ProfileContent = ({ setUser }) => {
     const userState = store.getState();
     const user = userState.user.user;
-    if (!user) return '';
-
     const router = useRouter();
+    if (!user) return '';
 
     const logout = async () => {
         try {
