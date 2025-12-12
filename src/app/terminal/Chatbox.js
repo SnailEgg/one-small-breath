@@ -72,14 +72,14 @@ const Chatbox = ( { setUser } ) => {
             <div className="overflow-y-auto flex flex-col-reverse relative grow scrollbar-terminal">
                 { messages.toReversed().map( (message, index) => {
                     if (message.role === 'system') return;
-
+                    
                     return (
                         <ChatMessage key={message.id} text={message.content} name={message.role === 'user' ? username || 'user' : message.role} isFirst={index===messages.length-1}></ChatMessage>
                     );
                 } ) }
             </div>
             <form onSubmit={sendChat} className="flex mt-[2.5vh]">
-                <input className="p-2 mr-2 border border-[--terminal-primary] bg-transparent focus:outline-none placeholder:text-[--terminal-primary] placeholder:italic grow glow-box glow-text" type="text" onChange={handleInput} placeholder="..." value={input}/>
+                <input className="start-focused p-2 mr-2 border border-[--terminal-primary] bg-transparent focus:outline-none placeholder:text-[--terminal-primary] placeholder:italic grow glow-box glow-text" type="text" onChange={handleInput} placeholder="..." value={input}/>
                 <SendButton canSubmit={input.length > 0 && canSend} className='glow-box py-2 px-6 glow-text' buttonType='submit'></SendButton>
             </form>
         </div>

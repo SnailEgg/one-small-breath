@@ -70,7 +70,7 @@ const DDAE = ({ setUser }) => {
             <section className={`grow flex flex-col ${showHistory ? 'hidden xl:flex' : ''}`}>
                 <h2 className="text-sm sm:text-xl text-center md:text-start mb-[2vh]">Digital Documents Archive Explorer</h2>
                 <form onSubmit={queryDocs} className="w-full flex mb-[2vh]">
-                    <input maxLength='9' className="uppercase p-2 mr-2 border border-[--terminal-primary] bg-transparent focus:outline-none placeholder:text-[--terminal-primary] placeholder:italic grow glow-box glow-text" type="text" onChange={handleDocInput} placeholder="..." value={docInput}/>
+                    <input maxLength='9' className="start-focused uppercase p-2 mr-2 border border-[--terminal-primary] bg-transparent focus:outline-none placeholder:text-[--terminal-primary] placeholder:italic grow glow-box glow-text" type="text" onChange={handleDocInput} placeholder="..." value={docInput}/>
                     <SendButton canSubmit={docInput.length > 0} className='glow-box py-2 px-6 glow-text' buttonType='submit' />
                 </form>
                 <div className='grow overflow-auto scrollbar-terminal'>
