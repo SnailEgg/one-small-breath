@@ -31,7 +31,7 @@ const LoginForm = ({ setUser }) => {
     const user_query = { user_name: username, user_password: password };
 
     try {
-      const {data} = await axios.post("https://jordan-project.demo.compsci.cc/api/authenticate", user_query);
+      const {data} = await axios.post("/api/authenticate", user_query);
       if (data.authenticated === true) {
         setUser({ ...data.account });
         setUsername("");

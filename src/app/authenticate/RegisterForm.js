@@ -68,8 +68,8 @@ const RegisterForm = ({ setUser }) => {
       }
 
       try {
-        await axios.post("https://jordan-project.demo.compsci.cc/api/register", registerQuery);
-        const { data } = await axios.post("https://jordan-project.demo.compsci.cc/api/authenticate", loginQuery);
+        await axios.post("/api/register", registerQuery);
+        const { data } = await axios.post("/api/authenticate", loginQuery);
         setUser( { ...data.account } );
         setUsername('');
         setPassword('');
