@@ -14,7 +14,7 @@ export async function DELETE() {
   const { user_id } = verification;
 
   // Delete the user's records based on id from token, but retain the system prompt
-  await my_messages.deleteMany({ user_id: { $eq: user_id }, who: { $ne: 'system' } });
+  await my_messages.deleteMany({ user_id: { $eq: user_id } });
 
   return NextResponse.json({ result: [] }, { status: 200 });
 }
