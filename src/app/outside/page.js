@@ -16,7 +16,7 @@ export default function Home() {
     const endGame = () => {
         setIsOver(true);
         axios.post('/api/logout');
-        setTimeout(() => { setShowLink(true); }, 5000);
+        setTimeout(() => { setShowLink(true); }, 2000);
     }
 
     // redirect the user to the game if they haven't completed it yet
