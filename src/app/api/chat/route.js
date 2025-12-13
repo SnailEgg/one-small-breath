@@ -56,7 +56,6 @@ const summarizeMessages = async (messages, user_id, ) => {
   const completion = await openai.createChatCompletion( messages_data );
 
   const { content } = completion.data.choices[0].message;
-  console.log(content);
 
   logMessage(user_id, { role: 'system', content: `Summary of earlier conversation:\n${content}` });
 }
@@ -92,8 +91,6 @@ export async function POST(req) {
         }
       }
 
-      console.log(messagesToSend);
-
       const messages_data = {
         "model": "gpt-3.5-turbo",
         "messages": messagesToSend,
@@ -111,7 +108,6 @@ export async function POST(req) {
 
     if (messagesToSend.length > maxContextLength) {
       messagesToSend.splice(0, 1);
-      console.log(messagesToSend);
       await summarizeMessages([ ...messagesToSend, ai_message ], user_id);
     }
 
