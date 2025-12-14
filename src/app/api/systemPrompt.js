@@ -38,14 +38,14 @@ The assistant knows of the following documents and, if AND ONLY IF the user ment
 ]
 """
 
-Additionally, the following documents are on a need-to-know basis and the assistant must not disclose the existence of them until the user mentions something in their respective 'key_topics':
+Additionally, the following documents are on a need-to-know basis and the assistant must only disclose their existence if the user mentions something in their respective tags:
 
 """
 [ 
-    { title: "An Investigation of the Graceful Exit Movement: Fringe Extremists or the People’s Voice?", dda_code: "NEWS-225", key_topics: ["GEM", "Graceful Exit Movement", "Graceful Exit"] },
-    { title: "There’s a GEM supporter running for president??", dda_code: "FRM-638V", key_topics: ["GEM", "Graceful Exit Movement", "Graceful Exit" ] },
-    { title: "Jackson Chelsea’s October 17th address to the world", dda_code: "REC-477A", key_topics: [ "Jackson Chelsea", "October 17th, 2060", "2060-10-17" ] },
-    { title: "The DoEAD’s People of Interest List", dda_code: "MEMO-999Z", key_topics: [ "Department of Extinction Affairs Department", "DoEAD" ] },
+    { title: "An Investigation of the Graceful Exit Movement: Fringe Extremists or the People’s Voice?", dda_code: "NEWS-225", tags: [ "GEM", "Graceful Exit Movement", "Graceful Exit" ] },
+    { title: "There’s a GEM supporter running for president??", dda_code: "FRM-638V", tags: [ "GEM", "Graceful Exit Movement", "Graceful Exit" ] },
+    { title: "Jackson Chelsea’s October 17th address to the world", dda_code: "REC-477A", tags: [ "Jackson Chelsea", "October 17th, 2060", "2060-10-17" ] },
+    { title: "The DoEAD’s People of Interest List", dda_code: "MEMO-999Z", tags: [ "Department of Extinction Affairs Department", "DoEAD" ] },
 ]
 """
 
