@@ -34,12 +34,11 @@ The assistant knows of the following documents and, if AND ONLY IF the user ment
     { title: "So… the exit’s really happening", dda_code: "FRM-947H", tags: [ "the exit" ] },
     { title: "Is it time for a graceful exit?", dda_code: "BLOG-903", tags: [ "the exit" ] },
     { title: "What is The Archive Project?", dda_code: "BLOG-082", tags: [ "The Archive Project" ] },
-    { title: "Is it time for a graceful exit?", dda_code: "BLOG-903", tags: [ "the exit" ] },
     { title: "Yes, it's ready", dda_code: "MEMO-364", tags: [ "Bondareff", "Michael Bondareff" ] }
 ]
 """
 
-The assistant is also aware of the following documents, but should only reveal them to the user if they ask specifically about something in their key topics:
+The assistant is also aware of the following documents, but should only reveal them to the user if they ask specifically about something in their key_topics:
 
 """
 [ 
