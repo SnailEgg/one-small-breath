@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import my_users, { my_messages } from "../../../database/models";
 import db_connect from "../../../database/db-connection";
 import verifyToken from "../verifyToken";
-import systemPrompt from "../systemPrompt";
+import { basicPrompt, documentPrompt } from "../systemPrompt";
 import summaryPrompt from "../summaryPrompt";
 
 const db = db_connect();
@@ -14,7 +14,7 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-const maxContextLength = 6;
+const maxContextLength = 7;
 
 // this function has no security checks;
 // only use it after confirming the user's authentication
@@ -31,7 +31,7 @@ const getMessages = async (user_id) => {
     return {role: who, content: dialog, id: _id};
   });
 
-  messages = [ {role: 'system', content: systemPrompt.replace('[full name]', name) }, ...messages ];
+  messages = [ {role: 'system', content: basicPrompt.replace('[full name]', name) }, {role: 'system', content: documentPrompt }, ...messages ];
 
   return messages;
 }
@@ -84,9 +84,9 @@ export async function POST(req) {
     try {
       // remove all messages before the last summary, retaining the original system prompt
       messagesToSend = [...messages];
-      for (let i = messagesToSend.length - 1; i > 0; i--) {
+      for (let i = messagesToSend.length - 1; i > 1; i--) {
         if (messagesToSend[i].role === 'system') {
-          messagesToSend.splice(1, i - 1);
+          messagesToSend.splice(2, i - 2);
           break;
         }
       }
