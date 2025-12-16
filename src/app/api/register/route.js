@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server';
 import { my_messages, my_users } from "../../../database/models";
 import bcrypt from 'bcryptjs';
 import db_connect from "../../../database/db-connection";
-import systemPrompt from '../systemPrompt';
 
 const db = db_connect();
 
@@ -45,13 +44,6 @@ export async function POST(req) {
 
     const created_user = await my_users.find({"username": {$eq: username}});
     const new_user = created_user[0];
-
-    /*await my_messages.insertOne({
-        user_id: new_user._id,
-        who: 'system',
-        dialog: systemPrompt.replace('[full name]', name),
-        when: Date.now()
-    });*/
 
     return NextResponse.json(
         { 

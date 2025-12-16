@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import my_users, { my_messages } from "../../../database/models";
 import db_connect from "../../../database/db-connection";
 import verifyToken from "../verifyToken";
-import { basicPrompt, documentPrompt } from "../systemPrompt";
+import { basicPrompt, parserPrompt } from "../systemPrompts";
 import summaryPrompt from "../summaryPrompt";
 
 const db = db_connect();
@@ -14,7 +14,7 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-const maxContextLength = 7;
+const maxContextLength = 6;
 
 // this function has no security checks;
 // only use it after confirming the user's authentication
@@ -31,7 +31,7 @@ const getMessages = async (user_id) => {
     return {role: who, content: dialog, id: _id};
   });
 
-  messages = [ {role: 'system', content: basicPrompt.replace('[full name]', name) }, {role: 'system', content: documentPrompt }, ...messages ];
+  messages = [ {role: 'system', content: basicPrompt.replace('[full name]', name) }, ...messages ];
 
   return messages;
 }
@@ -58,6 +58,29 @@ const summarizeMessages = async (messages, user_id, ) => {
   const { content } = completion.data.choices[0].message;
 
   logMessage(user_id, { role: 'system', content: `Summary of earlier conversation:\n${content}` });
+}
+
+const parsePhrases = async (message) => {
+  const documents = [
+    'title: "So… the exit’s really happening", DDA Code: "FRM-947H"\ntitle: "Is it time for a graceful exit?", DDA Code: "BLOG-903"',
+    'title: "What is The Archive Project?", dda_code: "BLOG-082"',
+    'title: "Yes, it\'s ready", DDA Code: "MEMO-364"',
+    'title: "An Investigation of the Graceful Exit Movement: Fringe Extremists or the People’s Voice?", DDA Code: "NEWS-225"\ntitle: "There’s a GEM supporter running for president??", DDA Code: "FRM-638V"',
+    'title: "Jackson Chelsea’s October 17th address to the world", DDA Code: "REC-477A"',
+    'title: "The DoEAD’s People of Interest List", DDA Code: "MEMO-999Z"'
+  ];
+
+  const messages_data = {
+    "model": "gpt-3.5-turbo",
+    "messages": [ { role: 'system', content: parserPrompt }, {role: 'user', content: message } ],
+  };
+  const completion = await openai.createChatCompletion( messages_data );
+  const { content } = completion.data.choices[0].message;
+  console.log(content);
+  const index = parseInt(content);
+  if (index === NaN || index === 0) return false;
+
+  return documents[index - 1];
 }
 
 export async function POST(req) {
@@ -89,6 +112,11 @@ export async function POST(req) {
           messagesToSend.splice(2, i - 2);
           break;
         }
+      }
+
+      const documentsToReveal = await parsePhrases(query);
+      if (documentsToReveal) {
+        messagesToSend.push({role: 'system', content: `The user has just mentioned a key phrase and the assistant should reveal the following documents:\n${documentsToReveal}`});
       }
 
       const messages_data = {
