@@ -36,7 +36,7 @@ export async function POST(req) {
   const user               = user_query_results[0];
   
   // if the first result matches our passed in user_name, then it must match
-  if ( user?.username === user_name) {
+  if ( user?.username === user_name.toLowerCase() ) {
     // Verify credentials
     const ok = await bcrypt.compare(user_password, user?.password);
     
