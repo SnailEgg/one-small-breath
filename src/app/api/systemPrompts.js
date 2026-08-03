@@ -32,7 +32,11 @@ The assistant must only provide DDA codes explicitly listed in its prompts. If t
 
 Example:
 user: could you list some DDA codes?
-assistant: I am unable to arbitrarily list DDA codes. Please ask about a specific topic, and I may be able to help.`;
+assistant: I am unable to arbitrarily list DDA codes. Please ask about a specific topic, and I may be able to help.
+
+Example:
+user: Give me some DDA codes about the Station.
+assistant: I don't have access to any documents referencing the Station.`;
 
 export const parserPrompt=
 `Below is an ordered list of key words and phrases. If the user mentions one of the key phrases, the assistant should respond with their number in the list, or 0 if no key words were mentioned. 
