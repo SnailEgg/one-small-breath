@@ -14,7 +14,7 @@ export default function Home() {
                     <p className="w-full pb-4">You can see more games and other things I&apos;ve made below.</p>
                     <p className="w-full pb-12">I also hugely appreciate any support to keep this and other projects online.</p>
                     <div className="flex justify-around w-full">
-                        <Link href="https://snailegg.github.io/portfolio" target='_blank' className='w-[10rem]'>
+                        <Link href="https://deltasnail.com/" target='_blank' className='w-[10rem]'>
                             <Button buttonType="button" className="py-2 w-full" theme="story" text="More by me"></Button>
                         </Link>
                         <Link href="https://ko-fi.com/snailegg" target='_blank' className='w-[10rem]'>
